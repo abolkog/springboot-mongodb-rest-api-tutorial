@@ -1,0 +1,16 @@
+# Mac
+.DS_Store
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# Maven
+target/
+
+
+#IntelliJ files
+**/*.iml
+**/.idea
+**/.gradle
