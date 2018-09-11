@@ -1,8 +1,7 @@
 package com.abolkog.springboot.tut.todos;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,15 +14,31 @@ import java.util.List;
 @RequestMapping(value = "/api/v1/todos")
 public class TodoController {
 
-    private List<Todo> data = Arrays.asList(
-            new Todo(1, "First Todo", "This is the first todo"),
-            new Todo(2, "Second Todo", "This is the first todo"),
-            new Todo(3, "Third Todo", "This is the first todo"),
-            new Todo(4, "Fourth Todo", "This is the first todo"),
-            new Todo(5, "Fifth Todo", "This is the first todo"));
+    @Autowired
+    private TodoService todoService;
+
 
     @GetMapping(value = {"", "/"})
-    public List<Todo> listTodos() {
-        return data;
+    public List<Todo> getAllTodos() {
+        return todoService.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public Todo getTodoById(@PathVariable  int id) {
+        return todoService.getById(id);
+    }
+
+    @PostMapping(value = {"", "/"})
+    public Todo createNewTodo(@RequestBody Todo todo) {
+        if (todoService.save(todo)) {
+            return todo;
+        }
+
+        return null;
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteTodo(@PathVariable int id) {
+        todoService.delete(id);
     }
 }

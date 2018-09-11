@@ -10,6 +10,8 @@ public class Todo {
     private String title;
     private String description;
 
+    public Todo() {}
+
     public Todo(int id, String title, String description) {
         this.id = id;
         this.title = title;
