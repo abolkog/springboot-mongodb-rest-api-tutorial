@@ -1,2 +1,9 @@
 server:
   port: 8080
+
+spring:
+  data:
+    mongodb:
+      database: springTodos
+      host: localhost
+      port: 27017

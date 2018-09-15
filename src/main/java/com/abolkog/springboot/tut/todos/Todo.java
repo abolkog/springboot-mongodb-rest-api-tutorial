@@ -1,28 +1,46 @@
 package com.abolkog.springboot.tut.todos;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 /**
  * @author Khalid Elshafie <abolkog@gmail.com>
  * @Created 09/09/2018 10:11 AM.
  */
+@Document(collection = "todos")
 public class Todo {
 
-    private int id;
+    @Id
+    private String id;
+
+    @NotNull(message = "Title is required")
+    @Size(min = 3, message = "Title must be at least 3 characters long")
     private String title;
+
+    @NotNull(message = "Description is required")
     private String description;
 
-    public Todo() {}
+    private long timestamp;
 
-    public Todo(int id, String title, String description) {
+    public Todo() {
+        this.timestamp = System.currentTimeMillis();
+    }
+
+    public Todo(String id, String title, String description) {
         this.id = id;
         this.title = title;
         this.description = description;
+        this.timestamp = System.currentTimeMillis();
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -40,5 +58,13 @@ public class Todo {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
     }
 }
