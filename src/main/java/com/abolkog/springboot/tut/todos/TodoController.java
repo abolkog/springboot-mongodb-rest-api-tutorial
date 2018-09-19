@@ -6,7 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -30,7 +29,6 @@ public class TodoController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Todo> getTodoById(@PathVariable  String id) {
-
         Todo result =  todoService.getById(id);
         return new ResponseEntity<>(result, HttpStatus.OK);
 
@@ -49,4 +47,5 @@ public class TodoController {
         todoService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
 }
