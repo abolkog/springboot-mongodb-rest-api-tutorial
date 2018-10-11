@@ -1,9 +1,8 @@
 package com.abolkog.springboot.tut.security;
 
+import com.abolkog.springboot.tut.error.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -30,7 +29,13 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return new User("khalid",passwordEncoder().encode("password"), AuthorityUtils.NO_AUTHORITIES);
+//        return new User("khalid",passwordEncoder().encode("password"), AuthorityUtils.NO_AUTHORITIES);
+        AppUser user = userRepository.findByEmail(username);
+        if (user == null) {
+            throw new NotFoundException("User not found");
+        }
+
+        return user;
     }
 
     public void save(AppUser user) {
