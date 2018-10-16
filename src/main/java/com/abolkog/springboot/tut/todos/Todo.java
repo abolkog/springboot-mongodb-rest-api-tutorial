@@ -25,6 +25,8 @@ public class Todo {
 
     private long timestamp;
 
+    private String userId;
+
     public Todo() {
         this.timestamp = System.currentTimeMillis();
     }
@@ -66,5 +68,13 @@ public class Todo {
 
     public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

@@ -32,6 +32,7 @@ public class AppUser implements UserDetails{
 
     private Date created;
 
+
     public AppUser() {}
 
     public AppUser(@NotEmpty String email, @NotEmpty String password, @NotEmpty String name) {
